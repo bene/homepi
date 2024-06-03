@@ -1,0 +1,39 @@
+services:
+  proxprox:
+    image: ghcr.io/bene/proxprox/proxprox:main
+    restart: always
+    network_mode: host
+    environment:
+      - PROXY_WS_URL=${PROXPROX_PROXY_WS_URL}
+      - MODE=client
+  homeforce:
+    image: ghcr.io/bene/homeforce/homeforce:main
+    restart: always
+    ports:
+      - "80:3000"
+    environment:
+      - INDIGO_URL=${INDIGO_API_URL}
+      - INDIGO_API_TOKEN=${INDIGO_API_TOKEN}
+      - SCRIPTS_DIR=${HOMEFORCE_SCRIPTS_DIR}
+    volumes:
+      - ./scripts:/scripts
+  indigo:
+    image: ghcr.io/bene/indigo/gateway:main
+    restart: always
+    environment:
+      - API_ENDPOINT=${INDIGO_CONTROLLER_URL}
+      - GATEWAY_TOKEN=${INDIGO_CONTROLLER_TOKEN}
+      - CALLING_CODES=+43,+49
+    devices:
+      - /dev/ttyUSB0
+  homebridge:
+    image: homebridge/homebridge:latest
+    restart: always
+    network_mode: host
+    volumes:
+      - ./volumes/homebridge:/homebridge
+    logging:
+      driver: json-file
+      options:
+        max-size: "10mb"
+        max-file: "1"
