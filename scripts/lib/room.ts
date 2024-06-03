@@ -12,7 +12,7 @@ export const roomNameValidation = z.union([
 
 export type RoomName = z.infer<typeof roomNameValidation>;
 
-export const roomLabels: {
+export const roomMap: {
   [key in RoomName]: string;
 } = {
   bathRoom: "Badezimmer",

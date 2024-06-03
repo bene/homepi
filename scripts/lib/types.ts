@@ -1,9 +1,11 @@
-import type { focusNames } from "./focus";
+import type { focusMap } from "./focus";
 
 export type LightSetting = {
   [lightName: string]: any;
 };
 
 export type LightSettings = {
-  [Focus in keyof typeof focusNames]?: LightSetting;
+  default: LightSetting;
+} & {
+  [Focus in keyof typeof focusMap]?: LightSetting;
 };

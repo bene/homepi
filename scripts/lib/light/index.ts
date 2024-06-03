@@ -1,16 +1,29 @@
-import type { roomNames } from "../room";
+import type { roomMap } from "../room";
 import type { LightSettings } from "../types";
 import { bathroomLightSettings } from "./bathroom";
 
 type AllLightSettings = {
-  [RoomName in keyof typeof roomNames]: LightSettings;
+  [RoomName in keyof typeof roomMap]: LightSettings;
 };
 
 export const settings: AllLightSettings = {
   bathRoom: bathroomLightSettings,
-  livingRoom: {},
-  office: {},
-  hallway: {},
-  kitchen: {},
-  balcony: {},
+  livingRoom: {
+    default: {},
+  },
+  office: {
+    default: {},
+  },
+  bedRoom: {
+    default: {},
+  },
+  hallway: {
+    default: {},
+  },
+  kitchen: {
+    default: {},
+  },
+  balcony: {
+    default: {},
+  },
 };

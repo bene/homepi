@@ -1,5 +1,4 @@
-export const focusNames = {
-  default: null,
+export const focusMap = {
   doNotDisturb: "Do Not Disturb",
   sleep: "Sleep",
   reading: "Lesen",
